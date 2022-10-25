@@ -1,9 +1,15 @@
 package main
 
 import (
-	"fmt"
+	"log"
+
+	"configApp/internal/config"
 )
 
 func main() {
-	fmt.Println("Hello world")
+	var configPath string = "config.yaml"
+	cfg, err := config.Init(configPath)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 }
