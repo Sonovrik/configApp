@@ -1,7 +1,6 @@
 package config
 
 import (
-	"errors"
 	"os"
 
 	"gopkg.in/yaml.v3"
@@ -34,11 +33,12 @@ type DB struct {
 func Init(pathToConfig string) (app *AppConfig, e error) {
 	yamlFile, err := os.ReadFile(pathToConfig)
 	if err != nil {
-		return nil, errors.New("Cannot open config file " + pathToConfig + " : " + err.Error())
+		return nil, err
 	}
 
+	app = &AppConfig{}
 	if err = yaml.Unmarshal(yamlFile, app); err != nil {
-		return nil, errors.New("Cannot parse yaml config file " + pathToConfig + " : " + err.Error())
+		return nil, err
 	}
 
 	return app, nil
